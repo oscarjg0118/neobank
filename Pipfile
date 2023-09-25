@@ -10,6 +10,8 @@ python-dotenv = "*"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
+drf-yasg = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
