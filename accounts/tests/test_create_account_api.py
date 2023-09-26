@@ -23,7 +23,7 @@ class CreateAccountAPITestCase(APITestCase):
         self.assertIn("id", response.data)
         self.assertIsInstance(response.data["id"], int)
         self.assertIsNotNone(response.data["user"])
-        self.assertEqual(response.data["balance"], "0.00")
+        self.assertEqual(response.data["balance"], 0)
         self.assertTrue(response.data["is_active"])
 
     def test_user_can_have_only_one_account(self):
@@ -61,7 +61,7 @@ class CreateAccountAPITestCase(APITestCase):
 
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data["balance"], "0.00")
+        self.assertEqual(response.data["balance"], 0)
 
     def test_cannot_set_is_active_on_create(self):
         data = {"user": self.user.id, "is_active": False}

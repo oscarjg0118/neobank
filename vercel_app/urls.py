@@ -19,7 +19,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from django.conf import settings
 from django.conf.urls.static import static
-from accounts.api.router import router_accounts
+from accounts.api.router import router_accounts, transactions_router
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -48,6 +48,7 @@ urlpatterns = [
             [
                 path("auth/", include("users.api.router")),
                 path("accounts/", include(router_accounts.urls)),
+                path("accounts/", include(transactions_router.urls)),
             ]
         ),
     ),
