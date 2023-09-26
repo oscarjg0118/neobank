@@ -1,106 +1,63 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fdjango&demo-title=Django%20%2B%20Vercel&demo-description=Use%20Django%204%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fdjango-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994241/random/django.png)
+# Neobank
 
-# Django + Vercel
+Este proyecto es una aplicación web desarrollada con Django y Django Rest Framework, utilizando PostgreSQL como sistema de gestión de base de datos, y está desplegada en Vercel.
 
-This example shows how to use Django 4 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+## Tecnologías Utilizadas
 
-## Demo
+- Django: Framework web para desarrollo en Python.
+- Django Rest Framework: Toolkit para construir APIs Web en Django.
+- PostgreSQL: Sistema de gestión de base de datos relacional.
+- Vercel: Plataforma de despliegue y hosting.
 
-https://django-template.vercel.app/
+## Características del Proyecto
 
-## How it Works
+Sistema backend para un neobanco, un banco digital que opera exclusivamente en línea. El sistema debe incluye gestión de usuarios, gestión de cuentas,
+procesamiento de transacciones y características de seguridad básicas.
 
-Our Django application, `example` is configured as an installed application in `vercel_app/settings.py`:
+## Instalación y Configuración
 
-```python
-# vercel_app/settings.py
-INSTALLED_APPS = [
-    # ...
-    'example',
-]
-```
+1. **Clonar el Repositorio**
 
-We allow "\*.vercel.app" subdomains in `ALLOWED_HOSTS`, in addition to 127.0.0.1:
+   ```sh
+   git clone https://github.com/oscarjg0118/neobank.git
+   cd neobank
 
-```python
-# vercel_app/settings.py
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
-```
+   # Configurar Entorno Virtual
+   python -m venv venv
+   source venv/bin/activate  # En Windows usar `venv\Scripts\activate`
 
-The `wsgi` module must use a public variable named `app` to expose the WSGI application:
+   # Instalar Dependencias
+   pip install -r requirements.txt
+   ```
+2. **Configurar Variables de Entorno**
 
-```python
-# vercel_app/wsgi.py
-app = get_wsgi_application()
-```
+   Crear un archivo .env en la carpeta vercerl_app y añadir las variables de entorno necesarias, por ejemplo:
 
-The corresponding `WSGI_APPLICATION` setting is configured to use the `app` variable from the `vercel_app.wsgi` module:
+   ```
+   DB_NAME= name   
+   DB_USER= user
+   DB_PASSWORD= password
+   DB_HOST= host.com
+   DB_PORT= 5432
+   ```
+3. **Migraciones y ejecutar**
+   ```sh
+   # Ejecutar Migraciones
+   python manage.py migrate
 
-```python
-# vercel_app/settings.py
-WSGI_APPLICATION = 'vercel_app.wsgi.app'
-```
+   # Ejecutar el Servidor de Desarrollo
+   python manage.py runserver
+   ```
+4. Ahora puedes acceder a la aplicación en http://127.0.0.1:8000.
 
-There is a single view which renders the current time in `example/views.py`:
+## Documentación
+- Django: [https://docs.djangoproject.com/](https://docs.djangoproject.com/)
+- Django Rest Framework: [https://www.django-rest-framework.org/](https://www.django-rest-framework.org/)
+- PostgreSQL: [https://www.postgresql.org/docs/](https://www.postgresql.org/docs/)
+- Vercel: [https://vercel.com/docs](https://vercel.com/docs)
 
-```python
-# example/views.py
-from datetime import datetime
+## Contribuir
+Si deseas contribuir al proyecto, por favor revisa las guías de contribución.
 
-from django.http import HttpResponse
-
-
-def index(request):
-    now = datetime.now()
-    html = f'''
-    <html>
-        <body>
-            <h1>Hello from Vercel!</h1>
-            <p>The current time is { now }.</p>
-        </body>
-    </html>
-    '''
-    return HttpResponse(html)
-```
-
-This view is exposed a URL through `example/urls.py`:
-
-```python
-# example/urls.py
-from django.urls import path
-
-from example.views import index
-
-
-urlpatterns = [
-    path('', index),
-]
-```
-
-Finally, it's made accessible to the Django server inside `vercel_app/urls.py`:
-
-```python
-# vercel_app/urls.py
-from django.urls import path, include
-
-urlpatterns = [
-    ...
-    path('', include('example.urls')),
-]
-```
-
-This example uses the Web Server Gateway Interface (WSGI) with Django to enable handling requests on Vercel with Serverless Functions.
-
-## Running Locally
-
-```bash
-python manage.py runserver
-```
-
-Your Django application is now available at `http://localhost:8000`.
-
-## One-Click Deploy
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fdjango&demo-title=Django%20%2B%20Vercel&demo-description=Use%20Django%204%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fdjango-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994241/random/django.png)
+## Licencia
+Este proyecto está bajo la licencia MIT. Ver [LICENSE](LICENSE) para más detalles.
