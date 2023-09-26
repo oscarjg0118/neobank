@@ -14,6 +14,7 @@ Este proyecto es una aplicación web desarrollada con Django y Django Rest Frame
 Sistema backend para un neobanco, un banco digital que opera exclusivamente en línea. El sistema debe incluye gestión de usuarios, gestión de cuentas,
 procesamiento de transacciones y características de seguridad básicas.
 
+Puede ver la documentacion del API en [Neobank API](https://neobank-delta.vercel.app/redoc/)
 ## Instalación y Configuración
 
 1. **Clonar el Repositorio**
@@ -48,7 +49,7 @@ procesamiento de transacciones y características de seguridad básicas.
    # Ejecutar el Servidor de Desarrollo
    python manage.py runserver
    ```
-4. Ahora puedes acceder a la aplicación en http://127.0.0.1:8000.
+4. Ahora puedes acceder a la aplicación en http://127.0.0.1:8000/redoc/.
 
 ## Documentación
 - Django: [https://docs.djangoproject.com/](https://docs.djangoproject.com/)
