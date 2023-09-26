@@ -10,3 +10,10 @@ class AccountSerializer(serializers.ModelSerializer):
         model = Account
         fields = ["id", "user", "balance", "is_active"]
         read_only_fields = ("balance", "is_active")
+
+
+class AccountCreationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ["id", "user", "balance", "is_active"]
+        read_only_fields = ("balance", "is_active")
