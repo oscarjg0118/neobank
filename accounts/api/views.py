@@ -1,17 +1,17 @@
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.viewsets import GenericViewSet
 from accounts.api.serializers import AccountSerializer
+from accounts.models import Account
 
 
-class AccountView(APIView):
-    permission_classes = [IsAuthenticated, IsAdminUser]
+class AccountViewSet(mixins.CreateModelMixin, GenericViewSet):
+    serializer_class = AccountSerializer
+    queryset = Account.objects.all()
 
-    def post(self, request):
-        serializer = AccountSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get_permissions(self):
+        if self.action == "create":
+            permission_classes = [IsAuthenticated, IsAdminUser]
+        else:
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]

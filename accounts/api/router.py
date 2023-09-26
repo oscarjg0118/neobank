@@ -1,6 +1,5 @@
-from django.urls import path
-from accounts.api.views import AccountView
+from rest_framework.routers import DefaultRouter
+from accounts.api.views import AccountViewSet
 
-urlpatterns = [
-    path("", AccountView.as_view(), name="account"),
-]
+router_accounts = DefaultRouter()
+router_accounts.register(prefix="", basename="accounts", viewset=AccountViewSet)
